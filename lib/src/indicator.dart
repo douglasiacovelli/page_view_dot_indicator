@@ -59,7 +59,8 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   double _getOffsetForCurrentPosition() {
-    final offsetPerPosition = _scrollController.position.maxScrollExtent / widget.count;
+    final offsetPerPosition =
+        _scrollController.position.maxScrollExtent / widget.count;
     final widgetOffset = widget.currentItem * offsetPerPosition;
     return widgetOffset;
   }
@@ -99,11 +100,16 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
               duration: widget.duration,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: index == widget.currentItem ? widget.selectedColor : widget.unselectedColor,
+                color: index == widget.currentItem
+                    ? widget.selectedColor
+                    : widget.unselectedColor,
               ),
-              width: index == widget.currentItem ? widget.size.width : widget.unselectedSize.width,
-              height:
-                  index == widget.currentItem ? widget.size.height : widget.unselectedSize.height,
+              width: index == widget.currentItem
+                  ? widget.size.width
+                  : widget.unselectedSize.width,
+              height: index == widget.currentItem
+                  ? widget.size.height
+                  : widget.unselectedSize.height,
             );
           },
         ),
