@@ -4,6 +4,8 @@ This lib draws a simple dot indicator for page views with a simple API. Right no
 dots with custom size, colors, spacing and duration. Besides that it also handles overflow by fading
 the edges if there are more dots than the width of the page allows.
 
+<img src="https://user-images.githubusercontent.com/1608564/111876654-7f539200-897e-11eb-9d1e-7a9ceb820ec7.gif" width="50%"/>
+
 ## Getting Started
 
 Add `page_view_dot_indicator` to your pubspec.yaml:
