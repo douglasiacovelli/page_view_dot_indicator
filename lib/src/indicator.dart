@@ -15,11 +15,11 @@ class PageViewDotIndicator extends StatefulWidget {
   final EdgeInsets margin;
 
   const PageViewDotIndicator({
-    Key key,
-    @required this.currentItem,
-    @required this.count,
-    @required this.unselectedColor,
-    @required this.selectedColor,
+    Key? key,
+    required this.currentItem,
+    required this.count,
+    required this.unselectedColor,
+    required this.selectedColor,
     this.size = const Size(12, 12),
     this.unselectedSize = const Size(12, 12),
     this.duration = const Duration(milliseconds: 150),
@@ -31,12 +31,12 @@ class PageViewDotIndicator extends StatefulWidget {
 }
 
 class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
-  ScrollController _scrollController;
+  late final ScrollController _scrollController;
 
   @override
   void initState() {
     _scrollController = ScrollController();
-    SchedulerBinding.instance.addPostFrameCallback((_) {
+    SchedulerBinding.instance!.addPostFrameCallback((_) {
       scrollToCurrentPosition();
     });
     super.initState();
