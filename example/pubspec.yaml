@@ -1,0 +1,21 @@
+name: page_view_dot_indicator_example
+description: Example of how to use the page view dot indicator lib
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  page_view_dot_indicator:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
