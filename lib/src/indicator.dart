@@ -49,7 +49,7 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   void scrollToCurrentPosition() {
-    double widgetOffset = _getOffsetForCurrentPosition();
+    final widgetOffset = _getOffsetForCurrentPosition();
     _scrollController
       ..animateTo(
         widgetOffset,
