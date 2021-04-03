@@ -9,7 +9,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   page_view_dot_indicator:
     path: ../
 
