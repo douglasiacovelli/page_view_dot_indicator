@@ -1,0 +1,18 @@
+on: pull_request
+jobs:
+  pr-verification:
+    name: PR verification
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: action/checkout@v2
+
+      - name: Install Flutter
+        uses: subosito/flutter-action@v1
+        with:
+          flutter-version: '1.22.6'
+      
+      - run: flutter pub get
+      - run: flutter analyze
+      - run: flutter test
