@@ -11,8 +11,7 @@ import 'package:flutter/widgets.dart';
 /// for each individual dot.
 ///
 /// It also handles having more dots than it could fit into the viewport by
-/// making the edges transparent and scrolling them as the currentItem is
-/// updated.
+/// fading the edges and scrolling them as the currentItem is updated.
 class PageViewDotIndicator extends StatefulWidget {
   /// Creates a PageViewDotIndicator widget.
   ///
@@ -146,8 +145,8 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
     return widgetOffset;
   }
 
-  /// This was done center the list items if they fit on screen or to make the list
-  /// more performatic and avoid rendering all dots at once, otherwise.
+  /// This is important to center the list items if they fit on screen by making the list shrinkWrap
+  /// or to make the list more performatic and avoid rendering all dots at once, otherwise.
   bool _needsScrolling() {
     final viewportWidth = MediaQuery.of(context).size.width;
     final itemWidth = widget.unselectedSize.width + widget.margin.left + widget.margin.right;
