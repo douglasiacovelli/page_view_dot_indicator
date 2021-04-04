@@ -12,7 +12,12 @@ jobs:
         uses: subosito/flutter-action@v1
         with:
           flutter-version: '1.22.6'
-      
-      - run: flutter pub get
-      - run: flutter analyze
+      - name: Flutter pub get
+        run: flutter pub get
+      - name: [Example] Linter
+        working-directory: ./example
+        run: flutter analyze
+      - name: [Lib] Linter
+        run: flutter analyze
+      - name: [Lib] Tests
       - run: flutter test
