@@ -1,9 +1,8 @@
 name: page_view_dot_indicator
 description: A simple and animated page view indicator in the form of dots, which you can customise color, size, space and duration.
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/douglasiacovelli/page_view_dot_indicator
 repository: https://github.com/douglasiacovelli/page_view_dot_indicator
-
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -16,5 +15,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  pedantic: 1.9.1
 
 flutter:
