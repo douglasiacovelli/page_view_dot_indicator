@@ -4,7 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
+/// PageViewDotIndicator is a widget that shows dots that are usually used
+/// along with a [PageView] widget.
+///
+/// This widget automatically animates transitions by using [AnimatedContainer]
+/// for each individual dot.
+///
+/// It also handles having more dots than it could fit into the viewport by
+/// making the edges transparent and scrolling them as the currentItem is
+/// updated.
 class PageViewDotIndicator extends StatefulWidget {
+  /// Creates a PageViewDotIndicator widget.
+  ///
+  /// The [currentItem], [count], [unselectedColor] and [selectedColor] arguments
+  /// must not be null.
   const PageViewDotIndicator({
     Key key,
     @required this.currentItem,
@@ -21,13 +34,31 @@ class PageViewDotIndicator extends StatefulWidget {
         ),
         super(key: key);
 
+  /// The index of the currentItem. It is a 0-based index and cannot be
+  /// neither greater or equal to count nor smaller than 0.
   final int currentItem;
+
+  /// The total amount of dots. Usually it should be the same count of pages of
+  /// the corresponding pageview).
   final int count;
+
+  /// The color applied to the dot when the dots' indexes are different from [currentItem].
   final Color unselectedColor;
+
+  /// The color applied to the dot when the dots' index is the same as [currentItem].
   final Color selectedColor;
+
+  /// The size of the dot corresponding to the [currentItem] or the default size of the dots
+  /// when [unselectedSize] is null.
   final Size size;
+
+  /// The size of the dots when the [currentItem] is different from the dots' indexes.
   final Size unselectedSize;
+
+  /// The duration of the animations used by the dots when the [currentItem] is changed
   final Duration duration;
+
+  /// The margin of the dots.
   final EdgeInsets margin;
 
   @override
