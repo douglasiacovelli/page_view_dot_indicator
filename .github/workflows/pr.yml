@@ -14,10 +14,10 @@ jobs:
           flutter-version: '1.22.6'
       - name: Flutter pub get
         run: flutter pub get
-      - name: [Example] Linter
+      - name: "[Example] Linter"
         working-directory: ./example
         run: flutter analyze
-      - name: [Lib] Linter
+      - name: "[Lib] Linter"
         run: flutter analyze
-      - name: [Lib] Tests
-      - run: flutter test
+      - name: "[Lib] Tests"
+        run: flutter test
