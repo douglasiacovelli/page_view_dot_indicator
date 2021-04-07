@@ -12,7 +12,7 @@ Add `page_view_dot_indicator` to your pubspec.yaml:
 
 ```yml
 dependencies:
-  page_view_dot_indicator: ^0.1.0-nullsafety.0
+  page_view_dot_indicator: ^0.1.0-nullsafety.1
 ```
 
 import `package:page_view_dot_indicator/page_view_dot_indicator.dart`
