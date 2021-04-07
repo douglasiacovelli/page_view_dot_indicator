@@ -9,13 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
   page_view_dot_indicator:
     path: ../
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  pedantic: 1.9.1
 
 flutter:
   uses-material-design: true
