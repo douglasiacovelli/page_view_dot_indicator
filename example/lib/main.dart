@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void initState() {
-    selectedPage = 5;
+    selectedPage = 0;
     _pageController = PageController(initialPage: selectedPage);
 
     super.initState();
