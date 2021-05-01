@@ -12,12 +12,12 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int selectedPage;
-  PageController _pageController;
+  late int selectedPage;
+  late final PageController _pageController;
 
   @override
   void initState() {
-    selectedPage = 5;
+    selectedPage = 0;
     _pageController = PageController(initialPage: selectedPage);
 
     super.initState();
