@@ -15,8 +15,8 @@ import 'package:flutter/widgets.dart';
 class PageViewDotIndicator extends StatefulWidget {
   /// Creates a PageViewDotIndicator widget.
   ///
-  /// The [currentItem], [count], [unselectedColor] and [selectedColor] arguments
-  /// must not be null.
+  /// The [currentItem], [count], [unselectedColor] and [selectedColor]
+  /// arguments must not be null.
   const PageViewDotIndicator({
     Key? key,
     required this.currentItem,
@@ -41,20 +41,24 @@ class PageViewDotIndicator extends StatefulWidget {
   /// the corresponding pageview).
   final int count;
 
-  /// The color applied to the dot when the dots' indexes are different from [currentItem].
+  /// The color applied to the dot when the dots' indexes are different from
+  /// [currentItem].
   final Color unselectedColor;
 
-  /// The color applied to the dot when the dots' index is the same as [currentItem].
+  /// The color applied to the dot when the dots' index is the same as
+  /// [currentItem].
   final Color selectedColor;
 
-  /// The size of the dot corresponding to the [currentItem] or the default size of the dots
-  /// when [unselectedSize] is null.
+  /// The size of the dot corresponding to the [currentItem] or the default
+  /// size of the dots when [unselectedSize] is null.
   final Size size;
 
-  /// The size of the dots when the [currentItem] is different from the dots' indexes.
+  /// The size of the dots when the [currentItem] is different from the dots'
+  /// indexes.
   final Size unselectedSize;
 
-  /// The duration of the animations used by the dots when the [currentItem] is changed
+  /// The duration of the animations used by the dots when the [currentItem] is
+  /// changed
   final Duration duration;
 
   /// The margin of the dots.
@@ -127,11 +131,16 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
               duration: widget.duration,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: index == widget.currentItem ? widget.selectedColor : widget.unselectedColor,
+                color: index == widget.currentItem
+                    ? widget.selectedColor
+                    : widget.unselectedColor,
               ),
-              width: index == widget.currentItem ? widget.size.width : widget.unselectedSize.width,
-              height:
-                  index == widget.currentItem ? widget.size.height : widget.unselectedSize.height,
+              width: index == widget.currentItem
+                  ? widget.size.width
+                  : widget.unselectedSize.width,
+              height: index == widget.currentItem
+                  ? widget.size.height
+                  : widget.unselectedSize.height,
             );
           },
         ),
@@ -140,20 +149,27 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   double _getOffsetForCurrentPosition() {
-    final offsetPerPosition = _scrollController.position.maxScrollExtent / widget.count;
+    final offsetPerPosition =
+        _scrollController.position.maxScrollExtent / widget.count;
     final widgetOffset = widget.currentItem * offsetPerPosition;
     return widgetOffset;
   }
 
-  /// This is important to center the list items if they fit on screen by making the list shrinkWrap
-  /// or to make the list more performatic and avoid rendering all dots at once, otherwise.
+  /// This is important to center the list items if they fit on screen by making
+  /// the list shrinkWrap or to make the list more performatic and avoid
+  /// rendering all dots at once, otherwise.
   bool _needsScrolling() {
     final viewportWidth = MediaQuery.of(context).size.width;
-    final itemWidth = widget.unselectedSize.width + widget.margin.left + widget.margin.right;
-    final selectedItemWidth = widget.size.width + widget.margin.left + widget.margin.right;
+    final itemWidth =
+        widget.unselectedSize.width + widget.margin.left + widget.margin.right;
+    final selectedItemWidth =
+        widget.size.width + widget.margin.left + widget.margin.right;
     final listViewPadding = 32;
     final shaderPadding = viewportWidth * 0.1;
     return viewportWidth <
-        selectedItemWidth + (widget.count - 1) * itemWidth + listViewPadding + shaderPadding;
+        selectedItemWidth +
+            (widget.count - 1) * itemWidth +
+            listViewPadding +
+            shaderPadding;
   }
 }
