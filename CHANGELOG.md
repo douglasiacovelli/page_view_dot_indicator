@@ -1,3 +1,6 @@
+## [1.0.0] - 2021-05-01
+- Stable Null safety support
+
 ## [0.1.0-nullsafety.1] - 2021-04-07
 - Add unit tests
 - Improve docs
