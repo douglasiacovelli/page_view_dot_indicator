@@ -36,9 +36,9 @@ PageViewDotIndicator(
   count: pageCount,
   unselectedColor: Colors.black26,
   selectedColor: Colors.blue,
-  size = const Size(12, 12),
-  unselectedSize = const Size(8, 8),
-  duration = const Duration(milliseconds: 200),
-  margin = const EdgeInsets.symmetric(horizontal: 8),
+  size: const Size(12, 12),
+  unselectedSize: const Size(8, 8),
+  duration: const Duration(milliseconds: 200),
+  margin: const EdgeInsets.symmetric(horizontal: 8),
 )
 ```
