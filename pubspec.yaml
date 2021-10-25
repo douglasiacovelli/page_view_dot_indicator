@@ -1,6 +1,6 @@
 name: page_view_dot_indicator
 description: A simple and animated page view indicator in the form of dots, which you can customise color, size, space and duration.
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/douglasiacovelli/page_view_dot_indicator
 repository: https://github.com/douglasiacovelli/page_view_dot_indicator
 
