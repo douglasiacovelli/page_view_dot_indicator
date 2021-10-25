@@ -1,3 +1,9 @@
+## [1.1.0] - 2021-10-25
+- Add more customization options such as:
+  - `bool fadeEdges`
+  - `EdgeInsets padding` (external padding)
+  - `Alignment alignment`
+
 ## [1.0.0] - 2021-05-01
 - Stable Null safety support
 

@@ -27,6 +27,9 @@ class PageViewDotIndicator extends StatefulWidget {
     this.unselectedSize = const Size(12, 12),
     this.duration = const Duration(milliseconds: 150),
     this.margin = const EdgeInsets.symmetric(horizontal: 4),
+    this.padding = const EdgeInsets.symmetric(horizontal: 16),
+    this.alignment = Alignment.center,
+    this.fadeEdges = true,
   })  : assert(
           currentItem >= 0 && currentItem < count,
           'Current item must be within the range of items. Make sure you are using 0-based indexing',
@@ -61,8 +64,17 @@ class PageViewDotIndicator extends StatefulWidget {
   /// changed
   final Duration duration;
 
-  /// The margin of the dots.
+  /// The margin between the dots.
   final EdgeInsets margin;
+
+  /// The external padding.
+  final EdgeInsets padding;
+
+  /// The alignment of the dots regarding the whole container.
+  final Alignment alignment;
+
+  /// If the edges should be faded or not.
+  final bool fadeEdges;
 
   @override
   _PageViewDotIndicatorState createState() => _PageViewDotIndicatorState();
@@ -104,10 +116,10 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: <Color>[
-            Color.fromARGB(0, 255, 255, 255),
+            widget.fadeEdges ? Color.fromARGB(0, 255, 255, 255) : Colors.white,
             Colors.white,
             Colors.white,
-            Color.fromARGB(0, 255, 255, 255),
+            widget.fadeEdges ? Color.fromARGB(0, 255, 255, 255) : Colors.white,
           ],
           tileMode: TileMode.mirror,
           stops: [0, 0.05, 0.95, 1],
@@ -115,10 +127,10 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
+        alignment: widget.alignment,
         height: widget.size.height,
         child: ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
+          padding: widget.padding,
           physics: NeverScrollableScrollPhysics(),
           itemCount: widget.count,
           controller: _scrollController,

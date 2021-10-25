@@ -40,5 +40,8 @@ PageViewDotIndicator(
   unselectedSize: const Size(8, 8),
   duration: const Duration(milliseconds: 200),
   margin: const EdgeInsets.symmetric(horizontal: 8),
+  padding: EdgeInsets.zero,
+  alignment: Alignment.centerLeft,
+  fadeEdges: false,
 )
 ```
