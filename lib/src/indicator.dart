@@ -2,7 +2,6 @@ library page_view_dot_indicator;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/widgets.dart';
 
 /// PageViewDotIndicator is a widget that shows dots that are usually used
 /// along with a [PageView] widget.
@@ -86,7 +85,7 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   @override
   void initState() {
     _scrollController = ScrollController();
-    SchedulerBinding.instance!.addPostFrameCallback((_) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
       scrollToCurrentPosition();
     });
     super.initState();

@@ -10,9 +10,16 @@ the edges if there are more dots than the width of the page allows.
 
 Add `page_view_dot_indicator` to your pubspec.yaml:
 
+### Flutter 3
 ```yml
 dependencies:
-  page_view_dot_indicator: ^1.0.0
+  page_view_dot_indicator: ^2.0.0
+```
+
+### Flutter 2
+```yml
+dependencies:
+  page_view_dot_indicator: ^1.1.0
 ```
 
 import `package:page_view_dot_indicator/page_view_dot_indicator.dart`
