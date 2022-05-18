@@ -68,16 +68,6 @@ class _MyAppState extends State<MyApp> {
               SizedBox(
                 height: 16,
               ),
-              PageViewDotIndicator(
-                currentItem: selectedPage,
-                count: pageCount,
-                unselectedColor: Colors.black26,
-                selectedColor: Colors.blue,
-                duration: Duration(milliseconds: 200),
-                padding: EdgeInsets.zero,
-                alignment: Alignment.centerLeft,
-                fadeEdges: false,
-              ),
             ],
           ),
         ),
