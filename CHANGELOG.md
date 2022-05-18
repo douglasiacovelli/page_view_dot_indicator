@@ -1,3 +1,7 @@
+## [2.0.0] - 2022-05-18
+**Breaking change**
+- Update to Flutter 3
+
 ## [1.1.0] - 2021-10-25
 - Add more customization options such as:
   - `bool fadeEdges`
