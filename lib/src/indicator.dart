@@ -84,16 +84,20 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
 
   @override
   void initState() {
+    super.initState();
     _scrollController = ScrollController();
     SchedulerBinding.instance.addPostFrameCallback((_) {
-      scrollToCurrentPosition();
+      if (_scrollController.hasClients) {
+        scrollToCurrentPosition();
+      }
     });
-    super.initState();
   }
 
   @override
   void didUpdateWidget(covariant PageViewDotIndicator oldWidget) {
-    scrollToCurrentPosition();
+    if (_scrollController.hasClients) {
+      scrollToCurrentPosition();
+    }
     super.didUpdateWidget(oldWidget);
   }
 
