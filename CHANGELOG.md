@@ -1,3 +1,6 @@
+## [2.0.1] - 2022-08-22
+- Attempt to fix Bad State: No element (thanks @ihavenoface5)
+
 ## [2.0.0] - 2022-05-18
 **Breaking change**
 - Update to Flutter 3
