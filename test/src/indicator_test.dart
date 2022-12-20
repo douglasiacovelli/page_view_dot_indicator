@@ -57,6 +57,29 @@ void main() {
     );
   });
 
+  testWidgets('indicator uses correct box shape', (tester) async {
+
+    await tester.pumpWidget(buildBoilerPlate(
+      PageViewDotIndicator(
+        count: 3,
+        currentItem: 1,
+        selectedColor: Color(0xFFFF00FF),
+        unselectedColor: Color(0xFF00FFFF),
+        boxShape: BoxShape.rectangle,
+      ),
+    ));
+
+    final listViewFinder = find.byType(ListView);
+    expect(listViewFinder, findsOneWidget);
+
+    final dotsFinder = find.descendant(
+        of: listViewFinder, matching: find.byType(AnimatedContainer));
+
+    final selectedDot =
+        dotsFinder.evaluate().elementAt(1).widget as AnimatedContainer;
+    expect((selectedDot.decoration as BoxDecoration).shape, BoxShape.rectangle);
+  });
+
   testWidgets(
       'indicator sets color of selected element different from unselected',
       (tester) async {

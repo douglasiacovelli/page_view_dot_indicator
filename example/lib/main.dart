@@ -62,6 +62,7 @@ class _MyAppState extends State<MyApp> {
                   unselectedColor: Colors.black26,
                   selectedColor: Colors.blue,
                   duration: Duration(milliseconds: 200),
+                  boxShape: BoxShape.rectangle,
                 ),
               ),
               SizedBox(
