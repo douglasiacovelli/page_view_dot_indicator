@@ -1,3 +1,6 @@
+## [2.1.0] - 2022-08-22
+- Add `boxShape` option to control the shape of the indicators (circle or rectangle)
+
 ## [2.0.1] - 2022-08-22
 - Attempt to fix Bad State: No element (thanks @ihavenoface5)
 
