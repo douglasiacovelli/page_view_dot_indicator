@@ -50,5 +50,6 @@ PageViewDotIndicator(
   padding: EdgeInsets.zero,
   alignment: Alignment.centerLeft,
   fadeEdges: false,
+  boxShape: BoxShape.square, //defaults to circle
 )
 ```
