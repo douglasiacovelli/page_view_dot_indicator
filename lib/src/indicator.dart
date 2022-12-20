@@ -29,6 +29,7 @@ class PageViewDotIndicator extends StatefulWidget {
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.alignment = Alignment.center,
     this.fadeEdges = true,
+    this.boxShape = BoxShape.circle,
   })  : assert(
           currentItem >= 0 && currentItem < count,
           'Current item must be within the range of items. Make sure you are using 0-based indexing',
@@ -74,6 +75,9 @@ class PageViewDotIndicator extends StatefulWidget {
 
   /// If the edges should be faded or not.
   final bool fadeEdges;
+
+  /// The shape of the indicators.
+  final BoxShape boxShape;
 
   @override
   _PageViewDotIndicatorState createState() => _PageViewDotIndicatorState();
@@ -145,7 +149,7 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
               margin: widget.margin,
               duration: widget.duration,
               decoration: BoxDecoration(
-                shape: BoxShape.circle,
+                shape: widget.boxShape,
                 color: index == widget.currentItem
                     ? widget.selectedColor
                     : widget.unselectedColor,
