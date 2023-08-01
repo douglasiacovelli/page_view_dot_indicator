@@ -30,7 +30,7 @@ class PageViewDotIndicator extends StatefulWidget {
     this.alignment = Alignment.center,
     this.fadeEdges = true,
     this.boxShape = BoxShape.circle,
-    this.borderRadius = null,
+    this.borderRadius,
   })  : assert(
           currentItem >= 0 && currentItem < count,
           'Current item must be within the range of items. Make sure you are using 0-based indexing',
@@ -84,7 +84,7 @@ class PageViewDotIndicator extends StatefulWidget {
   /// The shape of the indicators.
   final BoxShape boxShape;
 
-  // Border radius of the indicators.
+  /// Border radius of the indicators.
   final BorderRadius? borderRadius;
 
   @override
