@@ -63,6 +63,13 @@ class _MyAppState extends State<MyApp> {
                   selectedColor: Colors.blue,
                   duration: const Duration(milliseconds: 200),
                   boxShape: BoxShape.rectangle,
+                  onItemClicked: (index) {
+                    _pageController.animateToPage(
+                      index,
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeInOut,
+                    );
+                  },
                 ),
               ),
               const SizedBox(
