@@ -11,8 +11,7 @@ void main() {
     );
   }
 
-  testWidgets('indicator creates a listview with count of elements',
-      (tester) async {
+  testWidgets('indicator creates a listview with count of elements', (tester) async {
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
         count: 5,
@@ -25,13 +24,12 @@ void main() {
     final listViewFinder = find.byType(ListView);
     expect(listViewFinder, findsOneWidget);
 
-    final dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    final dotsFinder =
+        find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
     expect(dotsFinder, findsNWidgets(5));
   });
 
-  testWidgets('indicator asserts current item is within valid range',
-      (tester) async {
+  testWidgets('indicator asserts current item is within valid range', (tester) async {
     expect(
       () => buildBoilerPlate(
         PageViewDotIndicator(
@@ -58,7 +56,6 @@ void main() {
   });
 
   testWidgets('indicator uses correct box shape', (tester) async {
-
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
         count: 3,
@@ -72,17 +69,14 @@ void main() {
     final listViewFinder = find.byType(ListView);
     expect(listViewFinder, findsOneWidget);
 
-    final dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    final dotsFinder =
+        find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
 
-    final selectedDot =
-        dotsFinder.evaluate().elementAt(1).widget as AnimatedContainer;
+    final selectedDot = dotsFinder.evaluate().elementAt(1).widget as AnimatedContainer;
     expect((selectedDot.decoration as BoxDecoration).shape, BoxShape.rectangle);
   });
 
-  testWidgets(
-      'indicator sets color of selected element different from unselected',
-      (tester) async {
+  testWidgets('indicator sets color of selected element different from unselected', (tester) async {
     const unselectedColor = Color(0xFF00FFFF);
     const selectedColor = Color(0xFFFF00FF);
 
@@ -98,19 +92,16 @@ void main() {
     final listViewFinder = find.byType(ListView);
     expect(listViewFinder, findsOneWidget);
 
-    final dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    final dotsFinder =
+        find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
 
-    final selectedDot =
-        dotsFinder.evaluate().elementAt(2).widget as AnimatedContainer;
+    final selectedDot = dotsFinder.evaluate().elementAt(2).widget as AnimatedContainer;
     expect((selectedDot.decoration as BoxDecoration).color, selectedColor);
 
-    final unselectedDot0 =
-        dotsFinder.evaluate().elementAt(0).widget as AnimatedContainer;
+    final unselectedDot0 = dotsFinder.evaluate().elementAt(0).widget as AnimatedContainer;
     expect((unselectedDot0.decoration as BoxDecoration).color, unselectedColor);
 
-    final unselectedDot1 =
-        dotsFinder.evaluate().elementAt(1).widget as AnimatedContainer;
+    final unselectedDot1 = dotsFinder.evaluate().elementAt(1).widget as AnimatedContainer;
     expect((unselectedDot1.decoration as BoxDecoration).color, unselectedColor);
   });
 
@@ -132,19 +123,16 @@ void main() {
     final listViewFinder = find.byType(ListView);
     expect(listViewFinder, findsOneWidget);
 
-    final dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    final dotsFinder =
+        find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
 
-    final selectedDot =
-        dotsFinder.evaluate().elementAt(1).widget as AnimatedContainer;
+    final selectedDot = dotsFinder.evaluate().elementAt(1).widget as AnimatedContainer;
     expect((selectedDot.constraints), BoxConstraints.tight(selectedSize));
 
-    final unselectedDot0 =
-        dotsFinder.evaluate().elementAt(0).widget as AnimatedContainer;
+    final unselectedDot0 = dotsFinder.evaluate().elementAt(0).widget as AnimatedContainer;
     expect((unselectedDot0.constraints), BoxConstraints.tight(unselectedSize));
 
-    final unselectedDot2 =
-        dotsFinder.evaluate().elementAt(2).widget as AnimatedContainer;
+    final unselectedDot2 = dotsFinder.evaluate().elementAt(2).widget as AnimatedContainer;
     expect((unselectedDot2.constraints), BoxConstraints.tight(unselectedSize));
   });
 
@@ -164,8 +152,8 @@ void main() {
     final listViewFinder = find.byType(ListView);
     expect(listViewFinder, findsOneWidget);
 
-    final dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    final dotsFinder =
+        find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
 
     expect(dotsFinder, findsWidgets);
   });
@@ -184,8 +172,8 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    final dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    final dotsFinder =
+        find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
 
     expect(
       (dotsFinder.evaluate().elementAt(0).widget as AnimatedContainer).margin,
@@ -207,8 +195,8 @@ void main() {
 
     final listViewFinder = find.byType(ListView);
 
-    final dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    final dotsFinder =
+        find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
 
     expect(
       (dotsFinder.evaluate().elementAt(0).widget as AnimatedContainer).duration,
@@ -231,8 +219,7 @@ void main() {
     final listViewFinder = find.byType(ListView);
 
     expect(
-      (listViewFinder.evaluate().first.widget as ListView).physics
-          is NeverScrollableScrollPhysics,
+      (listViewFinder.evaluate().first.widget as ListView).physics is NeverScrollableScrollPhysics,
       true,
     );
   });
@@ -254,9 +241,7 @@ void main() {
     expect(shaderMask, findsOneWidget);
   });
 
-  testWidgets(
-      'indicator should scroll list to selected position when it starts',
-      (tester) async {
+  testWidgets('indicator should scroll list to selected position when it starts', (tester) async {
     const selectedWidgetColor = Color(0xFFFF00FF);
     await tester.pumpWidget(buildBoilerPlate(
       SizedBox(
@@ -275,15 +260,13 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    final dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    final dotsFinder =
+        find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
     final selectedDot = dotsFinder.evaluate().last.widget as AnimatedContainer;
-    expect(
-        (selectedDot.decoration as BoxDecoration).color, selectedWidgetColor);
+    expect((selectedDot.decoration as BoxDecoration).color, selectedWidgetColor);
   });
 
-  testWidgets(
-      'indicator should scroll list to selected position when it is updated',
+  testWidgets('indicator should scroll list to selected position when it is updated',
       (tester) async {
     const selectedWidgetColor = Color(0xFFFF00FF);
     await tester.pumpWidget(buildBoilerPlate(
@@ -302,11 +285,9 @@ void main() {
     await tester.pumpAndSettle();
 
     final listViewFinder = find.byType(ListView);
-    var dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    var dotsFinder = find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
     var selectedDot = dotsFinder.evaluate().first.widget as AnimatedContainer;
-    expect(
-        (selectedDot.decoration as BoxDecoration).color, selectedWidgetColor);
+    expect((selectedDot.decoration as BoxDecoration).color, selectedWidgetColor);
 
     await tester.pumpWidget(buildBoilerPlate(
       SizedBox(
@@ -323,10 +304,8 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    dotsFinder = find.descendant(
-        of: listViewFinder, matching: find.byType(AnimatedContainer));
+    dotsFinder = find.descendant(of: listViewFinder, matching: find.byType(AnimatedContainer));
     selectedDot = dotsFinder.evaluate().last.widget as AnimatedContainer;
-    expect(
-        (selectedDot.decoration as BoxDecoration).color, selectedWidgetColor);
+    expect((selectedDot.decoration as BoxDecoration).color, selectedWidgetColor);
   });
 }
