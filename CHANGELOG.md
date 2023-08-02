@@ -1,3 +1,6 @@
+## [2.2.0] - 2023-08-01
+- Add `borderRadius` option for `BoxShape.rectagle` by @berkeenesakt
+
 ## [2.1.0] - 2022-08-22
 - Add `boxShape` option to control the shape of the indicators (circle or rectangle)
 

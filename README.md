@@ -1,30 +1,18 @@
 # Page view dot indicator
 
+[![pub package](https://img.shields.io/pub/v/page_view_dot_indicator?style=plastic&logo=flutter)](https://pub.dev/packages/flutter_formx)
+
 This lib draws a simple dot indicator for page views with a simple API. Right now it is able to draw
 dots with custom size, colors, spacing and duration. Besides that it also handles overflow by fading
 the edges if there are more dots than the width of the page allows.
 
 <img src="https://user-images.githubusercontent.com/1608564/111876654-7f539200-897e-11eb-9d1e-7a9ceb820ec7.gif" width="50%"/>
 
-## Getting Started
+## Usage
 
-Add `page_view_dot_indicator` to your pubspec.yaml:
+Simply use this Widget in your page and make sure to use any form of state management to update the currentItem, such as setState.
 
-### Flutter 3
-```yml
-dependencies:
-  page_view_dot_indicator: ^2.0.0
-```
-
-### Flutter 2
-```yml
-dependencies:
-  page_view_dot_indicator: ^1.1.0
-```
-
-import `package:page_view_dot_indicator/page_view_dot_indicator.dart`
-
-## Most basic dot indicator
+#### These are the mandatory parameters:
 
 ```dart
 PageViewDotIndicator(
@@ -35,7 +23,7 @@ PageViewDotIndicator(
 )
 ```
 
-## But you can also customise other parameters, such as:
+#### But you can also customize it using other parameters, such as:
 
 ```dart
 PageViewDotIndicator(
