@@ -308,4 +308,30 @@ void main() {
     selectedDot = dotsFinder.evaluate().last.widget as AnimatedContainer;
     expect((selectedDot.decoration as BoxDecoration).color, selectedWidgetColor);
   });
+
+  testWidgets('indicator should assign click listener', (tester) async {
+    const selectedWidgetColor = Color(0xFFFF00FF);
+    final clicks = <int>[];
+    await tester.pumpWidget(buildBoilerPlate(
+      SizedBox(
+        width: 100,
+        child: PageViewDotIndicator(
+          count: 20,
+          currentItem: 0,
+          selectedColor: selectedWidgetColor,
+          unselectedColor: const Color(0xFF00FFFF),
+          onItemClicked: (index) => clicks.add(index),
+        ),
+      ),
+    ));
+
+    await tester.pumpAndSettle();
+
+    final listViewFinder = find.byType(ListView);
+    final dotGestureDetector =
+        find.descendant(of: listViewFinder, matching: find.byType(GestureDetector));
+
+    await tester.tap(dotGestureDetector.at(2));
+    expect(clicks, [2]);
+  });
 }
