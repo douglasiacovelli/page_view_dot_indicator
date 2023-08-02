@@ -31,6 +31,7 @@ class PageViewDotIndicator extends StatefulWidget {
     this.fadeEdges = true,
     this.boxShape = BoxShape.circle,
     this.borderRadius,
+    this.onItemClicked,
   })  : assert(
           currentItem >= 0 && currentItem < count,
           'Current item must be within the range of items. Make sure you are using 0-based indexing',
@@ -86,6 +87,9 @@ class PageViewDotIndicator extends StatefulWidget {
 
   /// Border radius of the indicators.
   final BorderRadius? borderRadius;
+
+  /// Callback called when item is clicked.
+  final void Function(int index)? onItemClicked;
 
   @override
   State<PageViewDotIndicator> createState() => _PageViewDotIndicatorState();
@@ -152,17 +156,22 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
           scrollDirection: Axis.horizontal,
           clipBehavior: Clip.antiAlias,
           itemBuilder: (context, index) {
-            return AnimatedContainer(
-              margin: widget.margin,
-              duration: widget.duration,
-              decoration: BoxDecoration(
-                borderRadius: widget.borderRadius,
-                shape: widget.boxShape,
-                color: index == widget.currentItem ? widget.selectedColor : widget.unselectedColor,
+            return GestureDetector(
+              onTap: () => widget.onItemClicked?.call(index),
+              child: AnimatedContainer(
+                margin: widget.margin,
+                duration: widget.duration,
+                decoration: BoxDecoration(
+                  borderRadius: widget.borderRadius,
+                  shape: widget.boxShape,
+                  color:
+                      index == widget.currentItem ? widget.selectedColor : widget.unselectedColor,
+                ),
+                width:
+                    index == widget.currentItem ? widget.size.width : widget.unselectedSize.width,
+                height:
+                    index == widget.currentItem ? widget.size.height : widget.unselectedSize.height,
               ),
-              width: index == widget.currentItem ? widget.size.width : widget.unselectedSize.width,
-              height:
-                  index == widget.currentItem ? widget.size.height : widget.unselectedSize.height,
             );
           },
         ),
