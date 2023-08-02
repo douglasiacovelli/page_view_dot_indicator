@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({super.key});
+
   @override
-  _MyAppState createState() => _MyAppState();
+  State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
@@ -24,7 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final pageCount = 5;
+    const pageCount = 5;
 
     return MaterialApp(
       title: 'Page view dot indicator',
@@ -46,10 +48,8 @@ class _MyAppState extends State<MyApp> {
                     });
                   },
                   children: List.generate(pageCount, (index) {
-                    return Container(
-                      child: Center(
-                        child: Text('Page $index'),
-                      ),
+                    return Center(
+                      child: Text('Page $index'),
                     );
                   }),
                 ),
@@ -61,11 +61,11 @@ class _MyAppState extends State<MyApp> {
                   count: pageCount,
                   unselectedColor: Colors.black26,
                   selectedColor: Colors.blue,
-                  duration: Duration(milliseconds: 200),
+                  duration: const Duration(milliseconds: 200),
                   boxShape: BoxShape.rectangle,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
             ],
