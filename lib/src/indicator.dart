@@ -88,7 +88,7 @@ class PageViewDotIndicator extends StatefulWidget {
   final BorderRadius? borderRadius;
 
   @override
-  _PageViewDotIndicatorState createState() => _PageViewDotIndicatorState();
+  State<PageViewDotIndicator> createState() => _PageViewDotIndicatorState();
 }
 
 class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
@@ -115,12 +115,11 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
 
   void scrollToCurrentPosition() {
     final widgetOffset = _getOffsetForCurrentPosition();
-    _scrollController
-      ..animateTo(
-        widgetOffset,
-        duration: Duration(milliseconds: 200),
-        curve: Curves.easeIn,
-      );
+    _scrollController.animateTo(
+      widgetOffset,
+      duration: const Duration(milliseconds: 200),
+      curve: Curves.easeIn,
+    );
   }
 
   @override
@@ -131,13 +130,13 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: <Color>[
-            widget.fadeEdges ? Color.fromARGB(0, 255, 255, 255) : Colors.white,
+            widget.fadeEdges ? const Color.fromARGB(0, 255, 255, 255) : Colors.white,
             Colors.white,
             Colors.white,
-            widget.fadeEdges ? Color.fromARGB(0, 255, 255, 255) : Colors.white,
+            widget.fadeEdges ? const Color.fromARGB(0, 255, 255, 255) : Colors.white,
           ],
           tileMode: TileMode.mirror,
-          stops: [0, 0.05, 0.95, 1],
+          stops: const [0, 0.05, 0.95, 1],
         ).createShader(bounds);
       },
       child: Container(
@@ -146,7 +145,7 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
         height: widget.size.height,
         child: ListView.builder(
           padding: widget.padding,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: widget.count,
           controller: _scrollController,
           shrinkWrap: !_needsScrolling(),
@@ -159,16 +158,11 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
               decoration: BoxDecoration(
                 borderRadius: widget.borderRadius,
                 shape: widget.boxShape,
-                color: index == widget.currentItem
-                    ? widget.selectedColor
-                    : widget.unselectedColor,
+                color: index == widget.currentItem ? widget.selectedColor : widget.unselectedColor,
               ),
-              width: index == widget.currentItem
-                  ? widget.size.width
-                  : widget.unselectedSize.width,
-              height: index == widget.currentItem
-                  ? widget.size.height
-                  : widget.unselectedSize.height,
+              width: index == widget.currentItem ? widget.size.width : widget.unselectedSize.width,
+              height:
+                  index == widget.currentItem ? widget.size.height : widget.unselectedSize.height,
             );
           },
         ),
@@ -177,8 +171,7 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   double _getOffsetForCurrentPosition() {
-    final offsetPerPosition =
-        _scrollController.position.maxScrollExtent / widget.count;
+    final offsetPerPosition = _scrollController.position.maxScrollExtent / widget.count;
     final widgetOffset = widget.currentItem * offsetPerPosition;
     return widgetOffset;
   }
@@ -188,16 +181,11 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   /// rendering all dots at once, otherwise.
   bool _needsScrolling() {
     final viewportWidth = MediaQuery.of(context).size.width;
-    final itemWidth =
-        widget.unselectedSize.width + widget.margin.left + widget.margin.right;
-    final selectedItemWidth =
-        widget.size.width + widget.margin.left + widget.margin.right;
-    final listViewPadding = 32;
+    final itemWidth = widget.unselectedSize.width + widget.margin.left + widget.margin.right;
+    final selectedItemWidth = widget.size.width + widget.margin.left + widget.margin.right;
+    const listViewPadding = 32;
     final shaderPadding = viewportWidth * 0.1;
     return viewportWidth <
-        selectedItemWidth +
-            (widget.count - 1) * itemWidth +
-            listViewPadding +
-            shaderPadding;
+        selectedItemWidth + (widget.count - 1) * itemWidth + listViewPadding + shaderPadding;
   }
 }

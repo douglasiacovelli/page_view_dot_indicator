@@ -63,8 +63,8 @@ void main() {
       PageViewDotIndicator(
         count: 3,
         currentItem: 1,
-        selectedColor: Color(0xFFFF00FF),
-        unselectedColor: Color(0xFF00FFFF),
+        selectedColor: const Color(0xFFFF00FF),
+        unselectedColor: const Color(0xFF00FFFF),
         boxShape: BoxShape.rectangle,
       ),
     ));
@@ -83,8 +83,8 @@ void main() {
   testWidgets(
       'indicator sets color of selected element different from unselected',
       (tester) async {
-    final unselectedColor = Color(0xFF00FFFF);
-    final selectedColor = Color(0xFFFF00FF);
+    const unselectedColor = Color(0xFF00FFFF);
+    const selectedColor = Color(0xFFFF00FF);
 
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
@@ -115,15 +115,15 @@ void main() {
   });
 
   testWidgets('indicator sets size correctly', (tester) async {
-    final selectedSize = Size(20, 20);
-    final unselectedSize = Size(16, 16);
+    const selectedSize = Size(20, 20);
+    const unselectedSize = Size(16, 16);
 
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
         count: 3,
         currentItem: 1,
-        selectedColor: Color(0xFFFF00FF),
-        unselectedColor: Color(0xFF00FFFF),
+        selectedColor: const Color(0xFFFF00FF),
+        unselectedColor: const Color(0xFF00FFFF),
         size: selectedSize,
         unselectedSize: unselectedSize,
       ),
@@ -149,8 +149,8 @@ void main() {
   });
 
   testWidgets('indicator uses animated containers', (tester) async {
-    final unselectedColor = Color(0xFF00FFFF);
-    final selectedColor = Color(0xFFFF00FF);
+    const unselectedColor = Color(0xFF00FFFF);
+    const selectedColor = Color(0xFFFF00FF);
 
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
@@ -171,13 +171,13 @@ void main() {
   });
 
   testWidgets('indicator uses margin provided', (tester) async {
-    final margin = const EdgeInsets.symmetric(horizontal: 12);
+    const margin = EdgeInsets.symmetric(horizontal: 12);
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
         count: 5,
         currentItem: 2,
-        selectedColor: Color(0xFFFF00FF),
-        unselectedColor: Color(0xFF00FFFF),
+        selectedColor: const Color(0xFFFF00FF),
+        unselectedColor: const Color(0xFF00FFFF),
         margin: margin,
       ),
     ));
@@ -194,13 +194,13 @@ void main() {
   });
 
   testWidgets('indicator uses duration provided', (tester) async {
-    final duration = const Duration(milliseconds: 1000);
+    const duration = Duration(milliseconds: 1000);
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
         count: 5,
         currentItem: 2,
-        selectedColor: Color(0xFFFF00FF),
-        unselectedColor: Color(0xFF00FFFF),
+        selectedColor: const Color(0xFFFF00FF),
+        unselectedColor: const Color(0xFF00FFFF),
         duration: duration,
       ),
     ));
@@ -217,13 +217,13 @@ void main() {
   });
 
   testWidgets('indicators list should not scroll', (tester) async {
-    final margin = const EdgeInsets.symmetric(horizontal: 12);
+    const margin = EdgeInsets.symmetric(horizontal: 12);
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
         count: 5,
         currentItem: 2,
-        selectedColor: Color(0xFFFF00FF),
-        unselectedColor: Color(0xFF00FFFF),
+        selectedColor: const Color(0xFFFF00FF),
+        unselectedColor: const Color(0xFF00FFFF),
         margin: margin,
       ),
     ));
@@ -238,13 +238,13 @@ void main() {
   });
 
   testWidgets('indicator should use shadermask', (tester) async {
-    final margin = const EdgeInsets.symmetric(horizontal: 12);
+    const margin = EdgeInsets.symmetric(horizontal: 12);
     await tester.pumpWidget(buildBoilerPlate(
       PageViewDotIndicator(
         count: 5,
         currentItem: 2,
-        selectedColor: Color(0xFFFF00FF),
-        unselectedColor: Color(0xFF00FFFF),
+        selectedColor: const Color(0xFFFF00FF),
+        unselectedColor: const Color(0xFF00FFFF),
         margin: margin,
       ),
     ));
@@ -257,15 +257,15 @@ void main() {
   testWidgets(
       'indicator should scroll list to selected position when it starts',
       (tester) async {
-    final selectedWidgetColor = Color(0xFFFF00FF);
+    const selectedWidgetColor = Color(0xFFFF00FF);
     await tester.pumpWidget(buildBoilerPlate(
-      Container(
+      SizedBox(
         width: 100,
         child: PageViewDotIndicator(
           count: 20,
           currentItem: 19,
           selectedColor: selectedWidgetColor,
-          unselectedColor: Color(0xFF00FFFF),
+          unselectedColor: const Color(0xFF00FFFF),
           margin: const EdgeInsets.symmetric(horizontal: 12),
         ),
       ),
@@ -285,15 +285,15 @@ void main() {
   testWidgets(
       'indicator should scroll list to selected position when it is updated',
       (tester) async {
-    final selectedWidgetColor = Color(0xFFFF00FF);
+    const selectedWidgetColor = Color(0xFFFF00FF);
     await tester.pumpWidget(buildBoilerPlate(
-      Container(
+      SizedBox(
         width: 100,
         child: PageViewDotIndicator(
           count: 20,
           currentItem: 0,
           selectedColor: selectedWidgetColor,
-          unselectedColor: Color(0xFF00FFFF),
+          unselectedColor: const Color(0xFF00FFFF),
           margin: const EdgeInsets.symmetric(horizontal: 12),
         ),
       ),
@@ -309,13 +309,13 @@ void main() {
         (selectedDot.decoration as BoxDecoration).color, selectedWidgetColor);
 
     await tester.pumpWidget(buildBoilerPlate(
-      Container(
+      SizedBox(
         width: 100,
         child: PageViewDotIndicator(
           count: 20,
           currentItem: 19,
           selectedColor: selectedWidgetColor,
-          unselectedColor: Color(0xFF00FFFF),
+          unselectedColor: const Color(0xFF00FFFF),
           margin: const EdgeInsets.symmetric(horizontal: 12),
         ),
       ),
