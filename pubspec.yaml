@@ -6,7 +6,7 @@ repository: https://github.com/douglasiacovelli/page_view_dot_indicator
 
 environment:
   sdk: ">=2.18.0 <3.0.0"
-  flutter: ">=3.0.0"
+  flutter: ">=3.3.0"
 
 dependencies:
   flutter:
