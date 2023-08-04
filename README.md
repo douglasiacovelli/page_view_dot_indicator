@@ -39,6 +39,7 @@ PageViewDotIndicator(
   alignment: Alignment.centerLeft,
   fadeEdges: false,
   boxShape: BoxShape.square, //defaults to circle
-  borderRadius: BorderRadius.circular(5) //only for rectangle shape
+  borderRadius: BorderRadius.circular(5), //only for rectangle shape
+  onItemClicked: (index) { ... }
 )
 ```
