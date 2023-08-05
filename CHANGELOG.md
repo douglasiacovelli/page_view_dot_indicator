@@ -1,3 +1,8 @@
+# 2.3.0
+- Update dependency constraints to `sdk: '>=2.18.0 <4.0.0'` `flutter: '>=3.3.0'`
+- Add `onItemClick` callback function
+- Remove pubspec.lock file
+
 # 2.2.0
 - Add `borderRadius` option for `BoxShape.rectagle` by @berkeenesakt
 
