@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const pageCount = 5;
+    const pageCount = 40;
 
     return MaterialApp(
       title: 'Page view dot indicator',
@@ -71,13 +71,13 @@ class _MyAppState extends State<MyApp> {
                     );
                   },
                   childText: (index) => "Item ${index}",
-                  size: Size(50, 30),
-                  unselectedSize: Size(50, 30),
+                  size: Size(50, 50),
+                  unselectedSize: Size(50, 50),
                   childTextStyle: (index) => TextStyle(
                       color: selectedPage == index ? Colors.red : Colors.green,
                     ),
                   borderRadius: BorderRadius.circular(50),
-                  padding: EdgeInsets.all(4),
+                  padding: EdgeInsets.all(16),
                   scrollable: true,
                 ),
               ),

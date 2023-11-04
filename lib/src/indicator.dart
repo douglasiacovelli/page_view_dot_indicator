@@ -130,7 +130,10 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   void scrollToCurrentPosition() {
-    final widgetOffset = _getOffsetForCurrentPosition();
+    final last10perc = (widget.count*0.1).ceil();
+    final widgetOffset = widget.currentItem > last10perc 
+      ? _getOffsetForCurrentPosition() + widget.size.width
+      : _getOffsetForCurrentPosition();
     _scrollController.animateTo(
       widgetOffset,
       duration: const Duration(milliseconds: 200),
