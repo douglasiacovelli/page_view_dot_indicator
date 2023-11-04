@@ -135,7 +135,9 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
       ? _getOffsetForCurrentPosition() + widget.size.width
       : _getOffsetForCurrentPosition();
     _scrollController.animateTo(
-      widgetOffset,
+      widgetOffset > _scrollController.position.maxScrollExtent
+        ? _scrollController.position.maxScrollExtent
+        : widgetOffset,
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeIn,
     );
@@ -227,9 +229,7 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
     final offsetPerPosition =
         _scrollController.position.maxScrollExtent / widget.count;
     final widgetOffset = widget.currentItem * offsetPerPosition;
-    return widgetOffset > _scrollController.position.maxScrollExtent
-      ? _scrollController.position.maxScrollExtent
-      : widgetOffset;
+    return widgetOffset;
   }
 
   /// This is important to center the list items if they fit on screen by making
