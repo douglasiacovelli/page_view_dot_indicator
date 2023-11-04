@@ -59,7 +59,7 @@ class _MyAppState extends State<MyApp> {
                 child: PageViewDotIndicator(
                   currentItem: selectedPage,
                   count: pageCount,
-                  unselectedColor: Colors.black26,
+                  unselectedColor: Colors.transparent,
                   selectedColor: Colors.blue,
                   duration: const Duration(milliseconds: 200),
                   boxShape: BoxShape.rectangle,
@@ -74,7 +74,8 @@ class _MyAppState extends State<MyApp> {
                   size: Size(50, 30),
                   unselectedSize: Size(50, 30),
                   childTextStyle: (index) => TextStyle(
-                      color: selectedPage == index ? Colors.red : Colors.green),
+                      color: selectedPage == index ? Colors.red : Colors.green,
+                    ),
                 ),
               ),
               const SizedBox(

@@ -168,38 +168,40 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
           scrollDirection: Axis.horizontal,
           clipBehavior: Clip.antiAlias,
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () => widget.onItemClicked?.call(index),
-              child: AnimatedContainer(
-                margin: widget.margin,
-                duration: widget.duration,
-                decoration: BoxDecoration(
-                  borderRadius: widget.borderRadius,
-                  shape: widget.boxShape,
-                  color: index == widget.currentItem
-                      ? widget.selectedColor
-                      : widget.unselectedColor,
-                ),
-                width: index == widget.currentItem
-                    ? widget.size.width
-                    : widget.unselectedSize.width,
-                height: index == widget.currentItem
-                    ? widget.size.height
-                    : widget.unselectedSize.height,
-                child: widget.childText != null
-                    ? Center(
-                        child: AnimatedDefaultTextStyle(
-                          duration: widget.duration,
-                          curve: Curves.easeIn,
-                          style: widget.childTextStyle != null
-                              ? widget.childTextStyle!(index)
-                              : const TextStyle(),
-                          child: Text(
-                            widget.childText!(index),
+            return Padding(
+              padding: widget.margin,
+              child: InkWell(
+                onTap: () => widget.onItemClicked?.call(index),
+                child: AnimatedContainer(
+                  duration: widget.duration,
+                  decoration: BoxDecoration(
+                    borderRadius: widget.borderRadius,
+                    shape: widget.boxShape,
+                    color: index == widget.currentItem
+                        ? widget.selectedColor
+                        : widget.unselectedColor,
+                  ),
+                  width: index == widget.currentItem
+                      ? widget.size.width
+                      : widget.unselectedSize.width,
+                  height: index == widget.currentItem
+                      ? widget.size.height
+                      : widget.unselectedSize.height,
+                  child: widget.childText != null
+                      ? Center(
+                          child: AnimatedDefaultTextStyle(
+                            duration: widget.duration,
+                            curve: Curves.easeIn,
+                            style: widget.childTextStyle != null
+                                ? widget.childTextStyle!(index)
+                                : const TextStyle(),
+                            child: Text(
+                              widget.childText!(index),
+                            ),
                           ),
-                        ),
-                      )
-                    : null,
+                        )
+                      : null,
+                ),
               ),
             );
           },
