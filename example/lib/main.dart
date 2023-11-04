@@ -78,6 +78,7 @@ class _MyAppState extends State<MyApp> {
                     ),
                   borderRadius: BorderRadius.circular(50),
                   padding: EdgeInsets.all(4),
+                  scrollable: true,
                 ),
               ),
               const SizedBox(

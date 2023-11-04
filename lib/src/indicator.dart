@@ -34,6 +34,7 @@ class PageViewDotIndicator extends StatefulWidget {
     this.onItemClicked,
     this.childText,
     this.childTextStyle,
+    this.scrollable,
   })  : assert(
           currentItem >= 0 && currentItem < count,
           'Current item must be within the range of items. Make sure you are using 0-based indexing',
@@ -99,6 +100,9 @@ class PageViewDotIndicator extends StatefulWidget {
   /// Styles the [childText]
   final TextStyle Function(int index)? childTextStyle;
 
+  /// Makes the list scrollable
+  final bool? scrollable;
+
   @override
   State<PageViewDotIndicator> createState() => _PageViewDotIndicatorState();
 }
@@ -161,7 +165,7 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
         height: widget.size.height,
         child: ListView.builder(
           padding: widget.padding,
-          physics: const NeverScrollableScrollPhysics(),
+          physics: widget.scrollable == null || widget.scrollable == false ? const NeverScrollableScrollPhysics() : null,
           itemCount: widget.count,
           controller: _scrollController,
           shrinkWrap: !_needsScrolling(),
