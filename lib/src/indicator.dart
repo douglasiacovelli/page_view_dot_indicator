@@ -32,6 +32,8 @@ class PageViewDotIndicator extends StatefulWidget {
     this.boxShape = BoxShape.circle,
     this.borderRadius,
     this.onItemClicked,
+    this.childText,
+    this.childTextStyle,
   })  : assert(
           currentItem >= 0 && currentItem < count,
           'Current item must be within the range of items. Make sure you are using 0-based indexing',
@@ -91,6 +93,12 @@ class PageViewDotIndicator extends StatefulWidget {
   /// Callback called when item is clicked.
   final void Function(int index)? onItemClicked;
 
+  /// Adds text inside the indicator
+  final String Function(int index)? childText;
+
+  /// Styles the [childText]
+  final TextStyle Function(int index)? childTextStyle;
+
   @override
   State<PageViewDotIndicator> createState() => _PageViewDotIndicatorState();
 }
@@ -134,10 +142,14 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: <Color>[
-            widget.fadeEdges ? const Color.fromARGB(0, 255, 255, 255) : Colors.white,
+            widget.fadeEdges
+                ? const Color.fromARGB(0, 255, 255, 255)
+                : Colors.white,
             Colors.white,
             Colors.white,
-            widget.fadeEdges ? const Color.fromARGB(0, 255, 255, 255) : Colors.white,
+            widget.fadeEdges
+                ? const Color.fromARGB(0, 255, 255, 255)
+                : Colors.white,
           ],
           tileMode: TileMode.mirror,
           stops: const [0, 0.05, 0.95, 1],
@@ -164,13 +176,30 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
                 decoration: BoxDecoration(
                   borderRadius: widget.borderRadius,
                   shape: widget.boxShape,
-                  color:
-                      index == widget.currentItem ? widget.selectedColor : widget.unselectedColor,
+                  color: index == widget.currentItem
+                      ? widget.selectedColor
+                      : widget.unselectedColor,
                 ),
-                width:
-                    index == widget.currentItem ? widget.size.width : widget.unselectedSize.width,
-                height:
-                    index == widget.currentItem ? widget.size.height : widget.unselectedSize.height,
+                width: index == widget.currentItem
+                    ? widget.size.width
+                    : widget.unselectedSize.width,
+                height: index == widget.currentItem
+                    ? widget.size.height
+                    : widget.unselectedSize.height,
+                child: widget.childText != null
+                    ? Center(
+                        child: AnimatedDefaultTextStyle(
+                          duration: widget.duration,
+                          curve: Curves.easeIn,
+                          style: widget.childTextStyle != null
+                              ? widget.childTextStyle!(index)
+                              : const TextStyle(),
+                          child: Text(
+                            widget.childText!(index),
+                          ),
+                        ),
+                      )
+                    : null,
               ),
             );
           },
@@ -180,7 +209,8 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   double _getOffsetForCurrentPosition() {
-    final offsetPerPosition = _scrollController.position.maxScrollExtent / widget.count;
+    final offsetPerPosition =
+        _scrollController.position.maxScrollExtent / widget.count;
     final widgetOffset = widget.currentItem * offsetPerPosition;
     return widgetOffset;
   }
@@ -190,11 +220,16 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   /// rendering all dots at once, otherwise.
   bool _needsScrolling() {
     final viewportWidth = MediaQuery.of(context).size.width;
-    final itemWidth = widget.unselectedSize.width + widget.margin.left + widget.margin.right;
-    final selectedItemWidth = widget.size.width + widget.margin.left + widget.margin.right;
+    final itemWidth =
+        widget.unselectedSize.width + widget.margin.left + widget.margin.right;
+    final selectedItemWidth =
+        widget.size.width + widget.margin.left + widget.margin.right;
     const listViewPadding = 32;
     final shaderPadding = viewportWidth * 0.1;
     return viewportWidth <
-        selectedItemWidth + (widget.count - 1) * itemWidth + listViewPadding + shaderPadding;
+        selectedItemWidth +
+            (widget.count - 1) * itemWidth +
+            listViewPadding +
+            shaderPadding;
   }
 }

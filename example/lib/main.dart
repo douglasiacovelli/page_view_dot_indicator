@@ -70,6 +70,11 @@ class _MyAppState extends State<MyApp> {
                       curve: Curves.easeInOut,
                     );
                   },
+                  childText: (index) => "Item ${index}",
+                  size: Size(50, 30),
+                  unselectedSize: Size(50, 30),
+                  childTextStyle: (index) => TextStyle(
+                      color: selectedPage == index ? Colors.red : Colors.green),
                 ),
               ),
               const SizedBox(
