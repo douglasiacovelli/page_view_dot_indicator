@@ -227,7 +227,9 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
     final offsetPerPosition =
         _scrollController.position.maxScrollExtent / widget.count;
     final widgetOffset = widget.currentItem * offsetPerPosition;
-    return widgetOffset;
+    return widgetOffset > _scrollController.position.maxScrollExtent
+      ? _scrollController.position.maxScrollExtent
+      : widgetOffset;
   }
 
   /// This is important to center the list items if they fit on screen by making
