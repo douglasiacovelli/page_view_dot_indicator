@@ -76,6 +76,8 @@ class _MyAppState extends State<MyApp> {
                   childTextStyle: (index) => TextStyle(
                       color: selectedPage == index ? Colors.red : Colors.green,
                     ),
+                  borderRadius: BorderRadius.circular(50),
+                  padding: EdgeInsets.all(4),
                 ),
               ),
               const SizedBox(
