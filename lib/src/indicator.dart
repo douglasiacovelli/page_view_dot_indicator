@@ -130,14 +130,14 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   void scrollToCurrentPosition() {
-    final last10perc = (widget.count*0.1).ceil();
-    final widgetOffset = widget.currentItem > last10perc 
-      ? _getOffsetForCurrentPosition() + widget.size.width
-      : _getOffsetForCurrentPosition();
+    final last10perc = (widget.count * 0.1).ceil();
+    final widgetOffset = widget.currentItem > last10perc
+        ? _getOffsetForCurrentPosition() + widget.size.width
+        : _getOffsetForCurrentPosition();
     _scrollController.animateTo(
       widgetOffset > _scrollController.position.maxScrollExtent
-        ? _scrollController.position.maxScrollExtent
-        : widgetOffset,
+          ? _scrollController.position.maxScrollExtent
+          : widgetOffset,
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeIn,
     );
@@ -170,7 +170,9 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
         height: widget.size.height,
         child: ListView.builder(
           padding: widget.padding,
-          physics: widget.scrollable == null || widget.scrollable == false ? const NeverScrollableScrollPhysics() : null,
+          physics: widget.scrollable == null || widget.scrollable == false
+              ? const NeverScrollableScrollPhysics()
+              : null,
           itemCount: widget.count,
           controller: _scrollController,
           shrinkWrap: !_needsScrolling(),
