@@ -32,6 +32,10 @@ class PageViewDotIndicator extends StatefulWidget {
     this.boxShape = BoxShape.circle,
     this.borderRadius,
     this.onItemClicked,
+    this.childText,
+    this.childTextStyle,
+    this.scrollable,
+    this.direction = Axis.horizontal
   })  : assert(
           currentItem >= 0 && currentItem < count,
           'Current item must be within the range of items. Make sure you are using 0-based indexing',
@@ -91,6 +95,18 @@ class PageViewDotIndicator extends StatefulWidget {
   /// Callback called when item is clicked.
   final void Function(int index)? onItemClicked;
 
+  /// Adds text inside the indicator
+  final String Function(int index)? childText;
+
+  /// Styles the [childText]
+  final TextStyle Function(int index)? childTextStyle;
+
+  /// Makes the list scrollable
+  final bool? scrollable;
+
+  /// Change the scroll direction
+  final Axis direction;
+
   @override
   State<PageViewDotIndicator> createState() => _PageViewDotIndicatorState();
 }
@@ -118,9 +134,14 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   void scrollToCurrentPosition() {
-    final widgetOffset = _getOffsetForCurrentPosition();
+    final last10perc = (widget.count * 0.1).ceil();
+    final widgetOffset = widget.currentItem > last10perc
+        ? _getOffsetForCurrentPosition() + widget.size.width
+        : _getOffsetForCurrentPosition();
     _scrollController.animateTo(
-      widgetOffset,
+      widgetOffset > _scrollController.position.maxScrollExtent
+          ? _scrollController.position.maxScrollExtent
+          : widgetOffset,
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeIn,
     );
@@ -134,10 +155,14 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
           colors: <Color>[
-            widget.fadeEdges ? const Color.fromARGB(0, 255, 255, 255) : Colors.white,
+            widget.fadeEdges
+                ? const Color.fromARGB(0, 255, 255, 255)
+                : Colors.white,
             Colors.white,
             Colors.white,
-            widget.fadeEdges ? const Color.fromARGB(0, 255, 255, 255) : Colors.white,
+            widget.fadeEdges
+                ? const Color.fromARGB(0, 255, 255, 255)
+                : Colors.white,
           ],
           tileMode: TileMode.mirror,
           stops: const [0, 0.05, 0.95, 1],
@@ -149,28 +174,55 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
         height: widget.size.height,
         child: ListView.builder(
           padding: widget.padding,
-          physics: const NeverScrollableScrollPhysics(),
+          physics: widget.scrollable == null || widget.scrollable == false
+              ? const NeverScrollableScrollPhysics()
+              : null,
           itemCount: widget.count,
           controller: _scrollController,
           shrinkWrap: !_needsScrolling(),
-          scrollDirection: Axis.horizontal,
+          scrollDirection: widget.direction,
           clipBehavior: Clip.antiAlias,
           itemBuilder: (context, index) {
-            return GestureDetector(
-              onTap: () => widget.onItemClicked?.call(index),
-              child: AnimatedContainer(
-                margin: widget.margin,
-                duration: widget.duration,
-                decoration: BoxDecoration(
-                  borderRadius: widget.borderRadius,
-                  shape: widget.boxShape,
-                  color:
-                      index == widget.currentItem ? widget.selectedColor : widget.unselectedColor,
+            return Padding(
+              padding: widget.margin,
+              child: ClipRRect(
+                borderRadius: widget.borderRadius ?? BorderRadius.circular(0),
+                child: Material(
+                  color: Colors.transparent,
+                  child: InkWell(
+                    onTap: () => widget.onItemClicked?.call(index),
+                    child: AnimatedContainer(
+                      duration: widget.duration,
+                      decoration: BoxDecoration(
+                        borderRadius: widget.borderRadius,
+                        shape: widget.boxShape,
+                        color: index == widget.currentItem
+                            ? widget.selectedColor
+                            : widget.unselectedColor,
+                      ),
+                      width: index == widget.currentItem
+                          ? widget.size.width
+                          : widget.unselectedSize.width,
+                      height: index == widget.currentItem
+                          ? widget.size.height
+                          : widget.unselectedSize.height,
+                      child: widget.childText != null
+                          ? Center(
+                              child: AnimatedDefaultTextStyle(
+                                duration: widget.duration,
+                                curve: Curves.easeIn,
+                                style: widget.childTextStyle != null
+                                    ? widget.childTextStyle!(index)
+                                    : const TextStyle(),
+                                child: Text(
+                                  widget.childText!(index),
+                                ),
+                              ),
+                            )
+                          : null,
+                    ),
+                  ),
                 ),
-                width:
-                    index == widget.currentItem ? widget.size.width : widget.unselectedSize.width,
-                height:
-                    index == widget.currentItem ? widget.size.height : widget.unselectedSize.height,
               ),
             );
           },
@@ -180,7 +232,8 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   double _getOffsetForCurrentPosition() {
-    final offsetPerPosition = _scrollController.position.maxScrollExtent / widget.count;
+    final offsetPerPosition =
+        _scrollController.position.maxScrollExtent / widget.count;
     final widgetOffset = widget.currentItem * offsetPerPosition;
     return widgetOffset;
   }
@@ -190,11 +243,16 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   /// rendering all dots at once, otherwise.
   bool _needsScrolling() {
     final viewportWidth = MediaQuery.of(context).size.width;
-    final itemWidth = widget.unselectedSize.width + widget.margin.left + widget.margin.right;
-    final selectedItemWidth = widget.size.width + widget.margin.left + widget.margin.right;
+    final itemWidth =
+        widget.unselectedSize.width + widget.margin.left + widget.margin.right;
+    final selectedItemWidth =
+        widget.size.width + widget.margin.left + widget.margin.right;
     const listViewPadding = 32;
     final shaderPadding = viewportWidth * 0.1;
     return viewportWidth <
-        selectedItemWidth + (widget.count - 1) * itemWidth + listViewPadding + shaderPadding;
+        selectedItemWidth +
+            (widget.count - 1) * itemWidth +
+            listViewPadding +
+            shaderPadding;
   }
 }

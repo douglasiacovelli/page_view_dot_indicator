@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const pageCount = 5;
+    const pageCount = 40;
 
     return MaterialApp(
       title: 'Page view dot indicator',
@@ -37,29 +37,66 @@ class _MyAppState extends State<MyApp> {
       home: Scaffold(
         backgroundColor: Colors.white,
         body: SafeArea(
-          child: Column(
+          child: Row(
             children: [
               Expanded(
-                child: PageView(
-                  controller: _pageController,
-                  onPageChanged: (page) {
-                    setState(() {
-                      selectedPage = page;
-                    });
-                  },
-                  children: List.generate(pageCount, (index) {
-                    return Center(
-                      child: Text('Page $index'),
-                    );
-                  }),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: PageView(
+                        controller: _pageController,
+                        onPageChanged: (page) {
+                          setState(() {
+                            selectedPage = page;
+                          });
+                        },
+                        children: List.generate(pageCount, (index) {
+                          return Center(
+                            child: Text('Page $index'),
+                          );
+                        }),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 24),
+                      child: PageViewDotIndicator(
+                        currentItem: selectedPage,
+                        count: pageCount,
+                        unselectedColor: Colors.yellow,
+                        selectedColor: Colors.blue,
+                        duration: const Duration(milliseconds: 200),
+                        boxShape: BoxShape.rectangle,
+                        onItemClicked: (index) {
+                          _pageController.animateToPage(
+                            index,
+                            duration: const Duration(milliseconds: 200),
+                            curve: Curves.easeInOut,
+                          );
+                        },
+                        childText: (index) => "Item ${index}",
+                        size: Size(50, 50),
+                        unselectedSize: Size(50, 50),
+                        childTextStyle: (index) => TextStyle(
+                          color: selectedPage == index ? Colors.red : Colors.green,
+                        ),
+                        borderRadius: BorderRadius.circular(50),
+                        padding: EdgeInsets.all(16),
+                        scrollable: true,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+              SizedBox(
+                width: 100,
+                height: double.maxFinite,
                 child: PageViewDotIndicator(
                   currentItem: selectedPage,
                   count: pageCount,
-                  unselectedColor: Colors.black26,
+                  unselectedColor: Colors.yellow,
                   selectedColor: Colors.blue,
                   duration: const Duration(milliseconds: 200),
                   boxShape: BoxShape.rectangle,
@@ -70,13 +107,21 @@ class _MyAppState extends State<MyApp> {
                       curve: Curves.easeInOut,
                     );
                   },
+                  childText: (index) => "Item ${index}",
+                  size: Size(50, 50),
+                  unselectedSize: Size(50, 50),
+                  childTextStyle: (index) => TextStyle(
+                    color: selectedPage == index ? Colors.red : Colors.green,
+                  ),
+                  borderRadius: BorderRadius.circular(50),
+                  padding: EdgeInsets.all(16),
+                  scrollable: true,
+                  direction: Axis.vertical,
+                  margin: EdgeInsets.symmetric(vertical: 8),
                 ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
+              )
             ],
-          ),
+          )
         ),
       ),
     );
