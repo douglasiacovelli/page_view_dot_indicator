@@ -35,6 +35,7 @@ class PageViewDotIndicator extends StatefulWidget {
     this.childText,
     this.childTextStyle,
     this.scrollable,
+    this.direction = Axis.horizontal
   })  : assert(
           currentItem >= 0 && currentItem < count,
           'Current item must be within the range of items. Make sure you are using 0-based indexing',
@@ -102,6 +103,9 @@ class PageViewDotIndicator extends StatefulWidget {
 
   /// Makes the list scrollable
   final bool? scrollable;
+
+  /// Change the scroll direction
+  final Axis direction;
 
   @override
   State<PageViewDotIndicator> createState() => _PageViewDotIndicatorState();
@@ -176,7 +180,7 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
           itemCount: widget.count,
           controller: _scrollController,
           shrinkWrap: !_needsScrolling(),
-          scrollDirection: Axis.horizontal,
+          scrollDirection: widget.direction,
           clipBehavior: Clip.antiAlias,
           itemBuilder: (context, index) {
             return Padding(
