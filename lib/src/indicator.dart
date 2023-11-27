@@ -119,11 +119,12 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
 
   void scrollToCurrentPosition() {
     final widgetOffset = _getOffsetForCurrentPosition();
-    _scrollController.animateTo(
-      widgetOffset,
-      duration: const Duration(milliseconds: 200),
-      curve: Curves.easeIn,
-    );
+    if (_scrollController.position.hasContentDimensions)
+      _scrollController.animateTo(
+        widgetOffset,
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeIn,
+      );
   }
 
   @override
@@ -180,7 +181,9 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   double _getOffsetForCurrentPosition() {
-    final offsetPerPosition = _scrollController.position.maxScrollExtent / widget.count;
+    final offsetPerPosition =
+        (_scrollController.position.hasContentDimensions ? _scrollController.position.maxScrollExtent : 0) /
+            widget.count;
     final widgetOffset = widget.currentItem * offsetPerPosition;
     return widgetOffset;
   }
