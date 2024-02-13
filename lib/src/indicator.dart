@@ -180,9 +180,14 @@ class _PageViewDotIndicatorState extends State<PageViewDotIndicator> {
   }
 
   double _getOffsetForCurrentPosition() {
-    final offsetPerPosition = _scrollController.position.maxScrollExtent / widget.count;
-    final widgetOffset = widget.currentItem * offsetPerPosition;
-    return widgetOffset;
+    if (_scrollController.position.hasContentDimensions) {
+      final offsetPerPosition = _scrollController.position.maxScrollExtent / widget.count;
+      final widgetOffset = widget.currentItem * offsetPerPosition;
+      return widgetOffset;
+    } else {
+      // See: https://github.com/flutter/flutter/issues/66250#issuecomment-696066912
+      return 0;
+    }
   }
 
   /// This is important to center the list items if they fit on screen by making
